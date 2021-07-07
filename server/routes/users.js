@@ -8,7 +8,10 @@ const {
   showEditUserFrom,
   updateData,
   deleteData,
-  redirectView
+  redirectView,
+  loginUser,
+  authenticateUser,
+  logoutUser
 } = require('../controllers/user_controller');
 
 const router = express.Router();
@@ -20,5 +23,8 @@ router
   .get('/:id/edit', showEditUserFrom)
   .put('/:id/update', updateData, redirectView)
   .delete('/:id/delete', deleteData, redirectView)
+  .get('/login', loginUser)
+  .post('login', authenticateUser)
+  .get('/logout', logoutUser, redirectView)
 
 module.exports = router;

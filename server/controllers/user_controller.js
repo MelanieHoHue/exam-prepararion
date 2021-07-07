@@ -117,7 +117,20 @@ const redirectView = (req, res, next) => {
   let redirectPath = res.locals.redirect;
   if (redirectPath) res.redirect(redirectPath);
   else next();
-}
+};
+
+const loginUser = (req, res) => {
+  res.render('users/login');
+};
+
+const authenticateUser = (req, res) => {
+  res.render('users/login');
+};
+
+const logoutUser = (req, res) => {
+  res.render('users/login');
+};
+
 
 module.exports = {
   createData,
@@ -127,5 +140,8 @@ module.exports = {
   index,
   showUserForm,
   showEditUserFrom,
-  redirectView
+  redirectView,
+  loginUser,
+  authenticateUser,
+  logoutUser
 };

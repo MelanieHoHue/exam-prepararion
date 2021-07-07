@@ -10,6 +10,15 @@ const userSchema = new Schema(
       type: Number,
       required: [true, 'age field is required'],
     },
+    email: {
+      type: String,
+      required: true,
+      lowercase: true,
+      unique: true
+    },
+    password: {
+
+    }
   },
   { timestamps: true },
 );
