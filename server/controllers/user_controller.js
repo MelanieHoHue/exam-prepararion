@@ -59,7 +59,9 @@ const updateData = (req, res, next) => {
     });
 };
 
-const deleteData = (req, res) => {
+const deleteData = (req, res, next) => {
+  console.log('deleteData!');
+ 
   User.findById(req.params.id)
     .then((data) => {
       if (!data) {
@@ -68,8 +70,10 @@ const deleteData = (req, res) => {
       return data.remove();
     })
     .then((data) => {
-      console.log('User removed!');
-      res.status(200).json(data);
+      console.log('User ', data, ' removed!');
+      //res.status(200).json(data);
+      res.locals.redirect = "/users";
+      next();
     })
     .catch((err) => {
       console.error(err);

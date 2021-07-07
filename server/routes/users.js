@@ -7,6 +7,7 @@ const {
   createData,
   showEditUserFrom,
   updateData,
+  deleteData,
   redirectView
 } = require('../controllers/user_controller');
 
@@ -18,5 +19,6 @@ router
   .post('/add', createData)
   .get('/:id/edit', showEditUserFrom)
   .put('/:id/update', updateData, redirectView)
+  .delete('/:id/delete', deleteData, redirectView)
 
 module.exports = router;
