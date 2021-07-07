@@ -1,8 +1,46 @@
 # Possible Tasks
 
-- find lint errors and fix them
-- creating a "users/new" route, view and controller action
+## useful
+> add start script to /server/package.json: `"start": "nodemon server.js",` and run server console without mevn cli
 
 
-## others to refine the app
-- integrate Bootstrap
+## what I´ve done
+> create user: view, route, controller action
+> update user: view, route, controller action + redirectView
+> delete user: route, controller action + redirectView
+
+> added layout ejs with css
+- for this I added
+-- index.js to /routes
+-- mainRoutes.js to /routes
+-- main_controller.js to /controllers
+- also:
+-- installed express-ejs-layouts
+-- required it: `layouts = require("express-ejs-layouts");`
+-- added `app.use(layouts);` to server.js to register the layouts.ejs to get used by the app
+-- changed `app.use(express.static(__dirname + '/views/'));` to `app.use(express.static("public"));`to catch the right folder for public files (css etc.)
+-- added layout.ejs and index.ejs to /views
+-- added navigation.ejs to /views/partials
+-- added some custom.css to /public/css
+-- added footer.ejs to /views/partials and integrated it into layouts.ejs
+
+> added user authentication: ***see branch User-Auth***
+- installed:
+-- express-session
+-- cookie-parser
+-- connect-flash
+-- express-validator
+-- passport
+-- passport-local-mongoose
+- added login.ejs to /views/users/login
+- added /login post and get route to users.js in /routes
+- added /login get route to users.js in /routes
+- added controller actions for routes to users_controller.js
+- refined user_schema.js and added email and password
+- required `passport = require('passort');` in *server.js* and *users_controller.js*
+- required `express-session` and `cookie-parser` in server.js
+- configured cookieParser and registered passport as middleware (see: server.js // User - Authentication)
+- required `passportLocalMongoose = require("passport-local-mongoose"),`in user schema to attach passport-local-mongoose as a plugin to the user schema
+- registered the plugin in user_schema (see: //Apply the passport-localmongoose module)
+- refined views for /users/index, /users/new and /users/edit
+---> until 25.4 "Adding flash messaging"
