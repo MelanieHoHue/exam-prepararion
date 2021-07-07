@@ -12,6 +12,13 @@ const port = process.env.PORT || 9000;
 
 const app = express();
 
+// body parsing
+app.use(
+    express.urlencoded({
+        extended: false
+    })
+);
+
 // Configure middlewares
 app.use(cors());
 app.use(express.json());

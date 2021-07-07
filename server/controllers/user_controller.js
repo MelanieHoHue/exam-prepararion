@@ -3,13 +3,18 @@
 const User = require('../models/user_schema');
 
 const createData = (req, res) => {
-  User.create(req.body)
+  let userParams = {
+    name: req.body.name,
+    age: req.body.age
+  };
+  User.create(userParams)
     .then((data) => {
       console.log('New User Created!', data);
       res.status(201).json(data);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
+        console.log(req.body);
         console.error('Error Validating!', err);
         res.status(422).json(err);
       } else {
@@ -22,6 +27,7 @@ const createData = (req, res) => {
 const readData = (req, res) => {
   User.find()
     .then((data) => {
+      console.log("data from api/users:", data);
       res.status(200).json(data);
     })
     .catch((err) => {
@@ -81,10 +87,15 @@ const index = (req, res, next) => {
             })
       }
 
+  const showUserForm = (req, res) => {
+    res.render('users/new');
+  } 
+
 module.exports = {
   createData,
   readData,
   updateData,
   deleteData,
-  index
+  index,
+  showUserForm
 };

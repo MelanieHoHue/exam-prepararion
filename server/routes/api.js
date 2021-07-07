@@ -10,7 +10,7 @@ const {
 const router = express.Router();
 
 router
-  .post('/users', createData)
+  //.post('/new-user', createData)
   .get('/users', readData)
   .put('user/:id', updateData)
   .delete('user/:id', deleteData);
