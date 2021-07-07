@@ -36,14 +36,17 @@ const readData = (req, res) => {
     });
 };
 
-const updateData = (req, res) => {
+const updateData = (req, res, next) => {
+  console.log('updateData!!!');
   User.findByIdAndUpdate(req.params.id, req.body, {
     useFindAndModify: false,
     new: true,
   })
     .then((data) => {
       console.log('User updated!');
-      res.status(201).json(data);
+      //res.status(201).json(data);
+      res.locals.redirect = "/users";
+      next();
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -75,21 +78,42 @@ const deleteData = (req, res) => {
 };
 
 const index = (req, res, next) => {
-        User.find()
-            .sort({ 'name.last': 'asc' })
-            .then(users => {
-              res.locals.users = users
-              res.render('users/index')
-            })
-            .catch(error => {
-              console.log(`Error fetching users: ${error.message}`)
-              next(error)
-            })
-      }
+  User.find()
+      .sort({ 'name.last': 'asc' })
+      .then(users => {
+        res.locals.users = users
+        res.render('users/index')
+      })
+      .catch(error => {
+        console.log(`Error fetching users: ${error.message}`)
+        next(error)
+      })
+};
 
-  const showUserForm = (req, res) => {
-    res.render('users/new');
-  } 
+const showUserForm = (req, res, next) => {
+  res.render('users/new');
+};
+
+const showEditUserFrom = (req, res) => {
+  let userId = req.params.id;
+  console.log("userId:", userId);
+  //Use findById to locate a user in the database by their ID.
+  User.findById(userId)
+    .then(user => {
+        //Render the user edit page for a specific user in the database.
+        res.render("users/edit", { user: user });
+    })
+    .catch(error => {
+        console.log(`Error fetching user by ID: ${error.message}`);
+        next(error);
+    });
+};
+
+const redirectView = (req, res, next) => {
+  let redirectPath = res.locals.redirect;
+  if (redirectPath) res.redirect(redirectPath);
+  else next();
+}
 
 module.exports = {
   createData,
@@ -97,5 +121,7 @@ module.exports = {
   updateData,
   deleteData,
   index,
-  showUserForm
+  showUserForm,
+  showEditUserFrom,
+  redirectView
 };

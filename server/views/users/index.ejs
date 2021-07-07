@@ -18,6 +18,9 @@
             <%= user.age %>
         </td>
         <td>
+            <a href="<%=`/users/${user._id}/edit` %>" a>Edit</a>
+        </td>
+        <td>
             <a href="<%=`/users/${user._id}?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
         </td>
     </tr>

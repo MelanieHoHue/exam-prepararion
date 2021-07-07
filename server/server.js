@@ -1,6 +1,7 @@
 // Importing required modules
 const cors = require('cors');
 const express = require('express');
+const methodOverride = require('method-override');
 
 // parse env variables
 require('dotenv').config();
@@ -22,6 +23,13 @@ app.use(
 // Configure middlewares
 app.use(cors());
 app.use(express.json());
+
+// use methodOverride as middleware.
+app.use(
+    methodOverride("_method", {
+        methods: ["POST", "GET"]
+    })
+);
 
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');

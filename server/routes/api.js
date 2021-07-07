@@ -10,9 +10,9 @@ const {
 const router = express.Router();
 
 router
-  //.post('/new-user', createData)
-  .get('/users', readData)
-  .put('user/:id', updateData)
+  //.post('/user/new', createData)
+  .get('users', readData)
+  .put('user/:id/update', updateData)
   .delete('user/:id', deleteData);
 
 module.exports = router;
