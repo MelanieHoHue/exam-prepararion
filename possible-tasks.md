@@ -24,7 +24,7 @@
 -- added some custom.css to /public/css
 -- added footer.ejs to /views/partials and integrated it into layouts.ejs
 
-> added user authentication: see branch User-Auth
+> added user authentication: ***see branch User-Auth***
 - installed:
 -- express-session
 -- cookie-parser
