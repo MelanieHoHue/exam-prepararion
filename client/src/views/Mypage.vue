@@ -2,14 +2,14 @@
   <center>
     <br />
     <h1>This is the Mypage component</h1>
-    <Userlist/>
+    <Userlist />
   </center>
 </template>
 
 <script>
 import Userlist from "@/components/Userlist";
 export default {
-  components: {Userlist},
+  components: { Userlist },
   data() {
     return {};
   }

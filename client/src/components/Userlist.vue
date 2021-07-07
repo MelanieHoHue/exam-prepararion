@@ -1,10 +1,9 @@
-
 <template>
   <div>
-  <h1>Current Users</h1>
-  <div class="users">
-    <User v-for="user in users" :key="user.id" :user="user" />
-  </div>
+    <h1>Current Users</h1>
+    <div class="users">
+      <User v-for="user in users" :key="user.id" :user="user" />
+    </div>
   </div>
 </template>
 <script>
@@ -23,9 +22,7 @@ export default {
   },
   created() {
     axios
-      .get(
-        "http://localhost:9000/api/users"
-      )
+      .get("http://localhost:9000/api/users")
       .then(response => {
         this.users = response.data;
       })
