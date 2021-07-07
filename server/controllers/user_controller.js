@@ -1,6 +1,7 @@
 'use strict';
 
 const User = require('../models/user_schema');
+const passport = require('passport');
 
 const createData = (req, res) => {
   let userParams = {

@@ -38,3 +38,9 @@
 - added controller actions for routes to users_controller.js
 - refined user_schema.js and added email and password
 - required `passport = require('passort');` in *server.js* and *users_controller.js*
+- required `express-session` and `cookie-parser` in server.js
+- configured cookieParser and registered passport as middleware (see: server.js // User - Authentication)
+- required `passportLocalMongoose = require("passport-local-mongoose"),`in user schema to attach passport-local-mongoose as a plugin to the user schema
+- registered the plugin in user_schema (see: //Apply the passport-localmongoose module)
+- refined views for /users/index, /users/new and /users/edit
+---> until 25.4 "Adding flash messaging"

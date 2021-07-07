@@ -3,7 +3,11 @@ const cors = require('cors');
 const express = require('express');
 const methodOverride = require('method-override');
 const router = require('./routes/index');
-const layouts = require("express-ejs-layouts");
+const layouts = require('express-ejs-layouts');
+const passport = require('passport'),
+    expressSession = require('express-session'),
+    cookieParser = require('cookie-parser'),
+    User = require('./models/user_schema');
 
 
 // parse env variables
@@ -32,6 +36,29 @@ app.use(
 // Configure middlewares
 app.use(cors());
 app.use(express.json());
+
+// User - Authentication
+//Configure Express.js application to use cookie-parser as middleware.
+app.use(cookieParser("secret_passcode"));
+
+//Configure express-session to use cookie-parser.
+app.use(
+    expressSession({
+        secret: "secret_passcode",
+        cookie: {
+            maxAge: 4000000
+        },
+        resave: false,
+        saveUninitialized: false
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // use methodOverride as middleware.
 app.use(
